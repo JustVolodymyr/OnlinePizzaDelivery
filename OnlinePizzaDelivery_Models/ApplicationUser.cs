@@ -17,8 +17,10 @@ namespace OnlinePizzaDelivery_Models
         [NotMapped]
         public string City { get; set; }
         [NotMapped]
-        public string State { get; set; }
+        public string HouseNumber { get; set; }
         [NotMapped]
-        public string PostalCode { get; set; }
+        public int Entrance { get; set; }
+        [NotMapped]
+        public int Apartment { get; set; }
     }
 }

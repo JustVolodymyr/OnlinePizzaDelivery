@@ -34,9 +34,11 @@ namespace OnlinePizzaDelivery_Models
         [Required]
         public string City { get; set; }
         [Required]
-        public string State { get; set; }
+        public string HouseNumber { get; set; }
         [Required]
-        public string PostalCode { get; set; }
+        public int Entrance { get; set; }
+        [Required]
+        public int Apartment { get; set; }
         [Required]
         public string FullName { get; set; }
         public string Email { get; set; }

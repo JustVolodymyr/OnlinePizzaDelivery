@@ -26,7 +26,24 @@
                         <input asp-for="Pizza.Name" class="form-control" />
                         <span asp-validation-for="Pizza.Name" class="text-danger"></span>
                     </div>
-
+                </div>
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="Pizza.Size"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Pizza.Size" class="form-control" />
+                        <span asp-validation-for="Pizza.Size" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row py-2">
+                    <div class="col-4">
+                        <label asp-for="Pizza.Ingredients"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Pizza.Ingredients" class="form-control" />
+                        <span asp-validation-for="Pizza.Ingredients" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group row py-2">
                     <div class="col-4">
@@ -37,25 +54,7 @@
                         <span asp-validation-for="Pizza.Price" class="text-danger"></span>
                     </div>
                 </div>
-
                 <div class="form-group row py-2">
-                    <div class="col-4">
-                        <label asp-for="Pizza.Ingredients"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Pizza.Ingredients" class="form-control" />
-                        <span asp-validation-for="Pizza.Ingredients" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group row py-2">
-                    <div class="col-4">
-                        <label asp-for="Pizza.Description"></label>
-                    </div>
-                    <div class="col-8">
-                        <textarea asp-for="Pizza.Description" class="form-control summernote"></textarea>
-                        <span asp-validation-for="Pizza.Description" class="text-danger"></span>
-                    </div>
 
                 </div>
                 <div class="form-group row py-2">

@@ -24,10 +24,11 @@
                                 <div class="row pl-3">
 
                                     <div class="col-12">
-                                        <span class="h4 text-dark" >@Model.Pizza.Category.Name</span>
+                                        <p class="h4 text-dark" >@Model.Pizza.Category.Name</p>
+                                        <span class="h4 text-dark">@Model.Pizza.Size cm</span>
                                         <h3 class="text-success"></h3>
 
-                                        <p class="text-secondary">@Html.Raw(Model.Pizza.Description) </p>
+                                        <p class="text-secondary">@Html.Raw(Model.Pizza.Ingredients) </p>
                                     </div>
                                         <div class="col-12">
                                             Count:

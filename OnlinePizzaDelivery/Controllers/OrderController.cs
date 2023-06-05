@@ -130,8 +130,9 @@ namespace OnlinePizzaDelivery.Controllers
             orderHeaderFromDb.PhoneNumber = OrderVM.OrderHeader.PhoneNumber;
             orderHeaderFromDb.StreetAddress = OrderVM.OrderHeader.StreetAddress;
             orderHeaderFromDb.City = OrderVM.OrderHeader.City;
-            orderHeaderFromDb.State = OrderVM.OrderHeader.State;
-            orderHeaderFromDb.PostalCode = OrderVM.OrderHeader.PostalCode;
+            orderHeaderFromDb.HouseNumber = OrderVM.OrderHeader.HouseNumber;
+            orderHeaderFromDb.Entrance = OrderVM.OrderHeader.Entrance;
+            orderHeaderFromDb.Apartment = OrderVM.OrderHeader.Apartment;
             orderHeaderFromDb.Email = OrderVM.OrderHeader.Email;
 
             _orderHRepo.Save();

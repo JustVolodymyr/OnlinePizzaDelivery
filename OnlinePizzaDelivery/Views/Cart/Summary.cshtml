@@ -5,7 +5,7 @@
     <div class="backgroundWhiteBorder">
         <div class="container">
             <div class="card">
-                <div class="card-header bg-dark text-light ml-0 row container">
+                <div class="card-header bg-dark text-light ml-0 row container" style="border-radius: 0px; margin-right: 0; margin-left: 0;">
                     <div class="col-6">
                         <i class="fa fa-shopping-cart"></i> &nbsp;
                         Order Summary
@@ -49,39 +49,44 @@
                                 </div>
                                     <div class="row my-1">
                                         <div class="col-3">
-                                            <label>Address</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input asp-for="ApplicationUser.StreetAddress" type="text" class="form-control" />
-                                        </div>
-                                    </div>
-
-                                    <div class="row my-1">
-                                        <div class="col-3">
                                             <label>City</label>
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="ApplicationUser.City" type="text" class="form-control" />
                                         </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Address</label>
                                     </div>
-
-                                    <div class="row my-1">
-                                        <div class="col-3">
-                                            <label>State</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input asp-for="ApplicationUser.State" type="text" class="form-control" />
-                                        </div>
+                                    <div class="col-9">
+                                        <input asp-for="ApplicationUser.StreetAddress" type="text" class="form-control" />
                                     </div>
-
-                                    <div class="row my-1">
-                                        <div class="col-3">
-                                            <label>Poastal Code</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input asp-for="ApplicationUser.PostalCode" type="text" class="form-control" />
-                                        </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>House Number</label>
                                     </div>
+                                    <div class="col-9">
+                                        <input asp-for="ApplicationUser.HouseNumber" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Entrance</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="ApplicationUser.Entrance" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Apartment</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="ApplicationUser.Apartment" type="text" class="form-control" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-12 col-lg-5 row">
                                 <div class="col-12">
@@ -96,6 +101,7 @@
                                         {
                                             <input type="hidden" asp-for="@Model.PizzaList[i].Id" />
                                             <input type="hidden" asp-for="@Model.PizzaList[i].Name" />
+                                            <input type="hidden" asp-for="@Model.PizzaList[i].Size" />
                                             <input type="hidden" asp-for="@Model.PizzaList[i].Price" />
                                             <input type="hidden" asp-for="@Model.PizzaList[i].TempCount" />
                                             <li class="list-group-item d-flex justify-content-between">
