@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Braintree;
+using Mailjet.Client.Resources;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlinePizzaDelivery_DataAccess.Repository.IRepository;
 using OnlinePizzaDelivery_Models;
@@ -14,36 +17,56 @@ using OnlinePizzaDelivery_Utility.BrainTree;
 
 namespace OnlinePizzaDelivery.Controllers
 {
-    [Authorize(Roles =WC.AdminRole)]
+    [Authorize(Roles = WC.CustomerRole)]
     public class OrderController : Controller
     {
         private readonly IOrderHeaderRepository _orderHRepo;
         private readonly IOrderDetailRepository _orderDRepo;
         private readonly IBrainTreeGate _brain;
-       
+        private readonly UserManager<IdentityUser> _userManager;
+
         [BindProperty]
         public OrderVM OrderVM { get; set; }
 
         public OrderController(
-        IOrderHeaderRepository orderHRepo, IOrderDetailRepository orderDRepo, IBrainTreeGate brain)
+        IOrderHeaderRepository orderHRepo, IOrderDetailRepository orderDRepo, IBrainTreeGate brain, UserManager<IdentityUser> userManager)
         {
             _brain = brain;
             _orderDRepo = orderDRepo;
             _orderHRepo = orderHRepo;
+            _userManager = userManager;
         }
 
-
+        [Authorize(Roles = WC.CustomerRole)]
         public IActionResult Index(string searchName = null, string searchEmail = null, string searchPhone = null, string Status=null)
         {
-            OrderListVM orderListVM = new OrderListVM()
+            OrderListVM orderListVM;
+
+            if (User.IsInRole(WC.AdminRole))
             {
-                OrderHList = _orderHRepo.GetAll(),
-                StatusList = WC.listStatus.ToList().Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                orderListVM = new OrderListVM()
                 {
-                    Text = i,
-                    Value = i
-                })
-            };
+                    OrderHList = _orderHRepo.GetAll(),
+                    StatusList = WC.listStatus.ToList().Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    })
+                };
+            }
+            else
+            {
+                var user = HttpContext.User.FindFirst(ClaimTypes.Email);
+                orderListVM = new OrderListVM()
+                {
+                    OrderHList = _orderHRepo.GetAll(x => x.Email == user.Value),
+                    StatusList = WC.listStatus.ToList().Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    })
+                };
+            }
 
             if (!string.IsNullOrEmpty(searchName))
             {
@@ -65,7 +88,7 @@ namespace OnlinePizzaDelivery.Controllers
             return View(orderListVM);
         }
 
-
+        [Authorize(Roles = WC.CustomerRole)]
         public IActionResult Details(int id)
         {
             OrderVM = new OrderVM()
@@ -77,6 +100,7 @@ namespace OnlinePizzaDelivery.Controllers
             return View(OrderVM);
         }
 
+        [Authorize(Roles = WC.AdminRole)]
         [HttpPost]
         public IActionResult StartProcessing()
         {
@@ -87,6 +111,7 @@ namespace OnlinePizzaDelivery.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = WC.AdminRole)]
         [HttpPost]
         public IActionResult ShipOrder()
         {
@@ -98,6 +123,7 @@ namespace OnlinePizzaDelivery.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = WC.AdminRole)]
         [HttpPost]
         public IActionResult CancelOrder()
         {
@@ -122,6 +148,7 @@ namespace OnlinePizzaDelivery.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = WC.AdminRole)]
         [HttpPost]
         public IActionResult UpdateOrderDetails()
         {
